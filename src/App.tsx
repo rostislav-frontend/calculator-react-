@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Button } from './Components/Button';
+import { ButtonContainer } from './Components/ButtonContainer';
+import { Calculator } from './Components/Calculator';
+import { Screen } from './Components/Screen';
+import { CalcProvider } from './Context/CalculatorContext';
 
 function App() {
+  const btnValues = [
+    ["C", "+-", "%", "/"],
+    [7, 8, 9, "x"],
+    [4, 5, 6, "-"],
+    [1, 2, 3, "+"],
+    [0, ".", "="],
+  ];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <CalcProvider>
+      <Calculator>
+        <Screen />
+        <ButtonContainer>
+          {btnValues.flat().map((button, index) => (
+            <Button
+              value={button}
+              key={index}
+            />
+          ))}
+        </ButtonContainer>
+      </Calculator>
+    </CalcProvider>
+    </>
   );
 }
 
